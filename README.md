@@ -9,6 +9,18 @@ Los patrones de expresión regular que utiliza REmatch siguen la siguiente sinta
 
 Donde la variable `nombre_variable` guarda información relativa al match de su patrón. Más adelante se explica con más detalle como se puede acceder a esta información a través del objeto `Match`. El comportamiento es similar a los `groups` normalmente utilizados en expresiones regulares compiladas en la librería `re` de Python.
 
+## Compilación
+
+Primero se debe contar con Emscripten (configurado) y la librería Boost. Se debe verificar que Emscripten cuente con accesso a los headers de la librería boost (pending fix). 
+
+Luego, en el directorio principal del repositorio, realizar (unix):
+
+    mkdir -pv build && cd build
+    emcmake cmake ..
+    make
+
+Luego de la compilación, en `lib/` se encontrarán los archivos `rematch_wasm.js` y `rematch_wasm.wasm`.
+
 ## Futura instalación
 
 Para instalar Rematch usando `npm` se debe correr lo siguiente:
