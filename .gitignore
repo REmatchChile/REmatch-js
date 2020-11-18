@@ -102,3 +102,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+### COMPILATION
+
+.vscode/
+
+build/
+lib/rematch_wasm.js
+*.wasm
