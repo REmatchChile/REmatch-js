@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "description": "",
   "main": "lib/index.js",
-  "git": "https://github.com/mpbascunan/new_library.git",
+  "git": "https://github.com/REmatchChile/REmatch-js.git",
   "scripts": {
     "test": "mocha"
   },
