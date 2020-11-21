@@ -139,6 +139,17 @@ try {
       });
 
 
+    
+  // describe('rematchjs', function() {
+  //   describe('#find()', function() {
+  //     it('should return the span of a word', function() {
+  //       const text = 'Lorem ipsum dolor sit amet consectetur adipiscing elit';
+  //       let rgx = REmatch.compile('.*!word{dolor}.*');
+  //       const result = rgx.find(text).span('word');
+  //       expect(result).to.eql([12, 16]);
+  //     })
+  //   }
+
 } catch (error) {
     console.log('Error:', error)
 };
