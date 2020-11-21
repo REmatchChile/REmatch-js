@@ -14,13 +14,13 @@ Module['onRuntimeInitialized'] = () => {
             let usedVars = [];
             let spanList = [];
             let curr;
-            let allSpans = [];
-            
+            // let allSpans = [];
+
             const instance = new Module.WasmInterface(text, regex);
             instance.init();
             let schema = instance.getOutputSchema();
             for (let i = 0; i < schema.size(); i++) {
-                usedVars.push(schema.get(i));   
+                usedVars.push(schema.get(i));
             }
 
             while (instance.hasNext()) {
@@ -31,7 +31,7 @@ Module['onRuntimeInitialized'] = () => {
                 }
                 allSpans = allSpans.concat([spanList]);
                 instance.next();
-                
+
             }
             instance.delete();
             var end = Date.now();
@@ -65,25 +65,25 @@ Module['onRuntimeInitialized'] = () => {
         }
 
 
-        const queries_rm = ['.*sparql!x{[^\n]*OPTIONAL[^\n]*\n}.*', 
+        const queries_rm = ['.*sparql!x{[^\n]*OPTIONAL[^\n]*\n}.*',
         '.*sparql!x{[^\n]*OPTIONAL[^\n]*OPTIONAL[^\n]*\n}.*',
         '.*.................12[^\n]*sparql!x{[^\n]*FILTER[^\n]*\n}.*',
         '.*!y{[^\+]*\+}[^\n]*sparql!x{[^\n]*OPTIONAL[^\n]*OPTIONAL[^\n]*\n}.*'];
 
-        const queries_rx = ['sparql([^\n]*OPTIONAL[^\n]*\n)', 
+        const queries_rx = ['sparql([^\n]*OPTIONAL[^\n]*\n)',
         'sparql([^\n]*OPTIONAL[^\n]*OPTIONAL[^\n]*\n)',
         '.................12[^\n]*sparql([^\n]*FILTER[^\n]*\n)',
         '([^\+]*\n)[^\+]*sparql([^\n]*OPTIONAL[^\n]*OPTIONAL[^\n]*\n)'];
 
 
         const test_a_file = (combo, nro_query, iterations) => {
-            
+
             query_rm = queries_rm[nro_query]
             query_rx = queries_rx[nro_query]
-         
+
 
             const doc = fs.readFileSync('../../RKBExplorer/sparql.log.combo.' + combo, "latin1");
-            
+
             // REmatch
             let times = [];
             console.log("---" + "Iniciando REmatch" + "---" );
@@ -97,7 +97,7 @@ Module['onRuntimeInitialized'] = () => {
             catch (err) {
                 console.log('Error: ', err)
             }
-            
+
             // XRegExp
             let times_XRegExp = []
             console.log("---" + "Iniciando XRegExp" + "---");
@@ -106,20 +106,20 @@ Module['onRuntimeInitialized'] = () => {
                 let exp = XRegExp_exp(doc, query_rx);
                 times_XRegExp.push(exp);
             }
-            
+
             // String
             let times_String = []
             console.log("---" + "Iniciando String" + "---");
 
-            
+
             for (var i = 0; i <= iterations - 1; i++) {
                 let exp = Str_exp(doc, query_rx);
                 times_String.push(exp);
             }
             console.log('-------------------------')
-            const count_times = [[times, 'REmatch'], [times_String, 'String'], 
+            const count_times = [[times, 'REmatch'], [times_String, 'String'],
             [times_XRegExp, 'XRegExp']]
-            
+
             for (var i = count_times.length - 1; i >= 0; i--) {
                 var sum = count_times[i][0].reduce(function(a, b){return a + b}, 0);
                 const avg = sum / count_times[i][0].length;
@@ -132,8 +132,8 @@ Module['onRuntimeInitialized'] = () => {
                     combo = (i + 1).toString();
                     console.log('*************', combo, '*************')
                     test = test_a_file(combo, nro_query, iterations)
-                    
-                    
+
+
                 }
         }
 
@@ -142,7 +142,7 @@ Module['onRuntimeInitialized'] = () => {
                 test = test_a_file(combo, i, iterations)
             }
         }
-        
+
 		var choice = readline.question("[0] Test all files\n[1] Test a file\n[2] Test all queries\n>");
 
 		if (choice == '0') {
@@ -154,7 +154,7 @@ Module['onRuntimeInitialized'] = () => {
 			var iterations = Number(readline.question("Iteraciones: "));
 			test_all_files(query, iterations);
 
-		} 
+		}
 		if (choice == '1') {
 
 			var combo = readline.question("Ingrese el número del combo: ");
@@ -176,7 +176,7 @@ Module['onRuntimeInitialized'] = () => {
     catch(err) {
         console.log('Error: ', err)
     }
-   
+
     }
 
 
