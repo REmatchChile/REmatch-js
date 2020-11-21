@@ -5,6 +5,7 @@
 #include "regex/regex.hpp"
 #include "regex/regex_options.hpp"
 #include "match.hpp"
+#include "anchors.hpp"
 
 #ifdef __EMSCRIPTEN__
 #include <emscripten/bind.h>
@@ -18,6 +19,12 @@ EMSCRIPTEN_BINDINGS() {
      .element(&std::pair<size_t, size_t>::first)
      .element(&std::pair<size_t, size_t>::second)
      ;
+
+  emscripten::enum_<Anchor>("Anchor")
+    .value("kUnanchored", kUnanchored)
+    .value("kSingleAnchor", kSingleAnchor)
+    .value("kBothAnchors", kBothAnchors)
+    ;
 
   emscripten::class_<rematch::Match>("Match")
     .constructor<>()
