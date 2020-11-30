@@ -63,6 +63,7 @@ let result4 = rgx2.findIter(text);
 console.log('Todos los usuarios gmail:');
 for (let res of result4) {
     console.log(res.group("usuario"))
+    console.log(res.span("usuario"))
 }
 
 // Usuarios y dominios de todos los correos correctos (ultima parte tiene max 3 simbolos)
@@ -74,4 +75,6 @@ let result5 = rgx3.findIter(text);
 console.log('Todos los usuarios gmail:');
 for (let res of result5) {
     console.log(res.groups())
+    console.log('id: ',res.span('id'))
+    console.log('domain: ',res.span('domain'))
 }
