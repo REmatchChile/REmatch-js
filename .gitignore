@@ -109,5 +109,5 @@ dist
 .vscode/
 
 build/
-lib/rematch_wasm.js
-*.wasm
+# lib/rematch_wasm.js
+# *.wasm
